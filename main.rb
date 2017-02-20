@@ -10,6 +10,13 @@ end
 get "/post_main" do
 	comments_data = erb :comments_data
 	comments_data = JSON.parse(comments_data)
-	test = post_main(comments_data)
-	return test
+	text = post_main(comments_data)
+	return text
+end
+
+get "/post_main_stats" do
+	comments_data = erb :comments_data
+	comments_data = JSON.parse(comments_data)
+	text = post_main_stats(comments_data)
+	return text
 end
