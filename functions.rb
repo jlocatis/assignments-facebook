@@ -8,8 +8,7 @@ def post_main(comments_data)
 	return_post_stats = "<span class=\"no_of_likes\">" + post_stats["likes"] + " likes</span> <span>" + post_stats["comments"] + " comments</span>"
 	return_post_comments = postComments(comments_data)
 	return_reply_comments = postReplies(comments_data)
-	binding.pry
-	return return_post_main, return_post_stats, return_post_comments
+	return return_post_main, return_post_stats, return_post_comments, return_reply_comments
 end
 
 #Accesses the post comments
@@ -34,7 +33,7 @@ def postReplies(comments_data)
 	comment = 0
 	replies_return = []
 	while post_comments_length > 0 do
-		if post_comments[comment]["replys_comments"] != nil
+		if post_comments[comment]["replys_comments"].length > 0
 			html = " <div class=\"replies\" style=\"display: none\">"
 			comment_replys_length = post_comments[comment]["replys_comments"].length
 			reply = 0
@@ -46,12 +45,12 @@ def postReplies(comments_data)
 				nested_replies_return << html
 			end
 			replies_return << nested_replies_return
-		elsif post_comments[comment]["replys_comments"] == nil
+		elsif post_comments[comment]["replys_comments"].length == 0
 			html = " <div class=\"replies\" style=\"display: none\"><div class=\"commentForm media\"><img src=\"images/user.png\" class=\"profilePhoto\"> <div class=\"media__info\"><form action=\"javascript\" method=\"post\"><textarea name=\"comment\" class=\"commentBox\"></textarea><input type=\"submit\"></form></div></div>"
 			replies_return << html
 		end
 		comment += 1
-		binding.pry
+		post_comments_length -= 1
 	end
 	return replies_return
 end

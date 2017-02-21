@@ -17,10 +17,17 @@ function post_data() {
 		post_comments = response[2];
 		for (x = 0; x < post_comments.length; x++) {
 			div3.insertAdjacentHTML("beforeend", post_comments[x]);
-			debugger;
+			if (Array.isArray(response[3][x]) == true) {
+				for (i = 0; i < response[3][x].length; i++) {
+					div3.insertAdjacentHTML("beforeend", response[3][x][i]);
+				}
+			} else {
+				div3.insertAdjacentHTML("beforeend", response[3][x]);
+			}
 		}
 		end_comments = "</div>"
 		div3.insertAdjacentHTML("beforeend", end_comments);
+		debugger;
 	}
 	xhr.send();
 }
